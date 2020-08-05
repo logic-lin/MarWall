@@ -1,0 +1,30 @@
+<view class="container">
+  <!-- 微信授权 -->
+  <view class="tip">{{userinfo.avatar?'授权成功，请完善信息':'点击头像授权登录啦'}}</view>
+  <button open-type="getUserInfo" bindgetuserinfo="onGotUserInfo" class="avatar">
+    <image mode="aspectFill" src="{{userinfo.avatar||'/icon/user/avatar-default.png'}}"></image>
+  </button>
+  <!-- 基本信息 -->
+  <view class="item" wx:for="{{regItem}}" wx:key="index">
+    <text>{{item.title}}</text>
+    <!-- 普通输入框 -->
+    <input wx:if="{{item.kind == 0}}" placeholder="{{item.holder}}" placeholder-style="font-size:0.9em" data-key="{{item.key}}" disabled="{{item.key == 'nickname'}}" value="{{userinfo[item.key]}}" bindinput="inputChange" type="{{item.key == 'tel' || item.key == 'qq'?'number':'text'}}">
+    <view wx:if="{{item.key == 'code'}}" class="code-button" bindtap="getCode">{{timer}}</view>
+    </input>
+    <!-- 选择输入框 -->
+    <picker wx:else range="{{picker[item.key]}}" bindchange="pickerChange" data-key="{{item.key}}" class="picker">
+      <input placeholder="{{item.holder}}" placeholder-style="font-size:0.9em" value="{{userinfo[item.key]}}" disabled></input>
+    </picker>
+  </view>
+  <!-- 校园认证 -->
+  <view class="item">
+    <text>校园认证</text>
+    <view class="certify">
+      <view>
+        <icon type='cancel' class="delete-icon" catchtap="cancelCertify" wx:if="{{userinfo.certificationimg}}"></icon>
+        <image src="{{userinfo.certificationimg||'../../../icon/release/uploadImage.png'}}" mode="aspectFit"  bindtap="chooseCertify"></image>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="commit" bindtap="commit"><text>提交</text></view>

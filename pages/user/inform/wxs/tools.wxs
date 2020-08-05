@@ -1,0 +1,23 @@
+var isExist = function(arr,target){
+  console.log(arr,target)
+  var a = [].concat(arr)
+  return a.indexOf(target)!=-1?true:false
+}
+var formatNumber = function(n){
+  return n<10?'0'+n:''+n
+}
+var formatTime = function(value){
+      var date = getDate(value)
+      var year = date.getFullYear()+'年'
+      var month = date.getMonth() + 1+'月'
+      var day = date.getDate()+'日'
+      var hour = formatNumber(date.getHours())+':'
+      var minute = formatNumber(date.getMinutes())+':'
+      var second = formatNumber(date.getSeconds())
+      return year+month+day+' '+hour+minute+second
+     
+  }
+module.exports = {
+  isExist: isExist,
+  formatTime:formatTime
+}

@@ -1,0 +1,60 @@
+/* pages/hole/hole.wxss */
+/* 主页面 */
+page {
+  background-color: #EEE;
+}
+/* 主容器 */
+.hole-main {
+  width: 750rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* 顶部栏 */
+.hole-bar {
+  width: 720rpx;
+  display: flex;
+  align-items: center;
+  border-radius: 15rpx;
+  background-color: white;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+.hole-bar-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin: 10rpx 20rpx 10rpx;
+}
+.hole-bar-text {
+  font-size: 25rpx;
+  color: #E64F80;
+}
+/* 列表栏 */
+.hole-experiment-list {
+  width: 720rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hole-experiment-item {
+  width: 720rpx;
+  height: 140rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 20rpx;
+  background-color: #FEFBFC;
+  margin-top: 30rpx;
+}
+.hole-experiment-icon {
+  width: 75rpx;
+  height: 75rpx;
+  margin-left: 240rpx;
+}
+.hole-experiment-name {
+  font-size: 34rpx;
+  margin-right: 240rpx;
+}
+.shadow{
+  box-shadow: 0 10rpx 30rpx -15rpx rgba(0, 0, 0, 0.2);
+}

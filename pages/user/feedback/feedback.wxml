@@ -1,0 +1,32 @@
+<!-- 反馈类型：意见建议/BUG反馈 -->
+<view class="container shadow" style="margin-top:50rpx">
+	<!-- 类型选择 -->
+	<view class="form-container">
+		<view class="title">
+			<text> 类型 </text>
+			<image class="required-icon" src="../../../icon/release/required.png" mode="widthFix"></image>
+		</view>
+		<picker bindchange="pickerChange" value="{{typeIndex}}" range="{{typeRange}}">
+			<input class="picker-placeholder" placeholder="请选择反馈类型" placeholder-style="font-size:28rpx;" disabled="true" value="{{typeIndex?typeRange[typeIndex]:''}}"></input>
+		</picker>
+	</view>
+	<!-- 内容填写 -->
+	<view class="form-container">
+		<textarea placeholder="请写下你的反馈" placeholder-style="font-size:28rpx;" value="{{inputText}}" bindinput="input"></textarea>
+	</view>
+	<!-- 图片选择 -->
+	<view class="form-container">
+		<view class="title">
+			<text> 图片 </text>
+		</view>
+		<view class="upload-image-container">
+			<image class="upload-image" src="{{item}}" mode="aspectFill" bindtap="onUploadImage" data-index="{{index}}" wx:for="{{tmpImgList}}" wx:key="index" wx:if="{{index<9}}">
+				<icon class="cancel-icon" color="#2e2e2e" type="cancel" size="20" catchtap="onDeleteImage" data-index="{{index}}" wx:if="{{index<tmpImgList.length-1}}"></icon>
+			</image>
+		</view>
+	</view>
+</view>
+<!-- 提交按钮 -->
+<view class="release-botton shadow" bindtap="onSend">
+	<text> 提交 </text>
+</view>

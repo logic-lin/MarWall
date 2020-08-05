@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "flowpost": "/components/flowpost/flowpost"
+  },
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance": 50
+}

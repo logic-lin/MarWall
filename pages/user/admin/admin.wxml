@@ -1,0 +1,224 @@
+<wxs src="wxs/tools.wxs" module="tools"/>
+<!-- 导航栏 -->
+<view class="nav-con">
+  <!-- 一级导航栏 -->
+  <scroll-view class="first-nav" scroll-x>
+    <view class="nav-detail {{selectNav.first == index?'select':''}}" wx:for="{{nav}}" wx:key="index" data-index="{{index}}" data-kind="first" bindtap="changeNav" wx:if="{{index!=4}}">{{item.title}}</view>
+  </scroll-view>
+  <!-- 二级导航栏 -->
+  <view class="second-nav">
+    <view class="nav-detail {{selectNav.second == index?'select':''}}" wx:for="{{nav[selectNav.first].child}}" wx:key="index" data-index="{{index}}" data-kind="second" bindtap="changeNav">{{item}}</view>
+  </view>
+</view>
+<view class="placeholer-view"></view>
+<!-- 认证状态列表 -->
+<view class="list" wx:if="{{selectNav.first == 0}}">
+<!-- 0:全部，1:已认证，2：待认证，3：未认证 -->
+  <view class="item-user-con" wx:for="{{userinfo}}" wx:key="index" wx:if="{{selectNav.second==0||selectNav.second == item.status}}">
+    <!-- 内容简介-->
+    <view class="item-user" bindtap="checkCertificationimg" data-index="{{index}}">
+      <!-- 文字信息 -->
+      <text>{{item.realname}}</text>
+      <text>{{item.gender}}</text>
+      <text>{{item.campus}}</text>
+      <text>{{item.grade}}</text>
+      <!-- 状态颜色图标 -->
+      <view class="status" style="background-color:{{item.certification?'green':item.certificationimg?'yellow':'red'}}"></view>
+    </view>
+    <!-- 下拉详细列表 -->
+    <scroll-view class="check-area" animation="{{checkIndex==index?animationData:''}}" wx:if="{{checkIndex==index}}">
+      <!-- 照片显示和无照片提示区域 -->
+      <image wx:if="{{userinfo[checkIndex].certificationimg}}" src="{{userinfo[checkIndex].certificationimg}}" data-url="{{userinfo[checkIndex].certificationimg}}" mode="aspectFill" bindtap="onPreviewImage"></image>
+      <view wx:else style="margin:170rpx">【无认证照片】</view>
+      <!-- 按钮区域 -->
+      <view class="but-area">
+        <view style="background-color:{{item.status!=1?'#67e667':'#ffcc73'}}" data-index="{{index}}" data-key="{{item.status!=1?'1':'2'}}" bindtap="changeCertification">{{item.status!=1?'认证通过':'取消认证'}}</view>
+        <view style="background-color:red" data-key='3' data-index="{{index}}" bindtap="changeCertification">认证失败</view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+<!-- 用户数据列表 -->
+<view class="list" wx:if="{{selectNav.first == 1}}">
+  <!-- 搜索框区域 -->
+  <view class="search-area" wx:if="{{selectNav.second == 1}}">
+    <picker range="{{modifyItem}}" range-key="{{'title'}}" value="{{pickerIndex}}" bindchange="changePicker"><text>{{pickerIndex==-1?'openid':modifyItem[pickerIndex].title}}</text></picker>
+    <input bindinput="changeSearch" value="{{searchValue}}"></input>
+    <view class="search-but" bindtap="search" data-kind="userinfo">搜索</view>
+  </view>
+
+  <view class="item-user-con" wx:for="{{userinfo}}" wx:key="index">  
+    <!-- 内容简介-->                              
+    <view class="item-user" bindtap="checkCertificationimg" data-index="{{index}}">
+      <text>{{item.realname}}</text>
+      <text>{{item.gender}}</text>
+      <text>{{item.campus}}</text>
+      <text>{{item.grade}}</text>
+      <!-- 管理员状态显示图标 -->
+      <image src="{{tools.isExist(item.organization,'ban')?'/icon/user/ban.png':'/icon/user/unban.png'}}" mode="aspectFit" catchtap="changeBan" data-index='{{index}}'></image>
+      <image src="{{tools.isExist(item.organization,'admin')?'/icon/user/admin-lock.png':'/icon/user/admin-unlock.png'}}" mode="aspectFit" catchtap="changeAdmin" data-index='{{index}}'></image>
+      
+    </view>
+    <!-- 下拉详细列表 -->
+    <scroll-view class="modify-area" animation="{{checkIndex==index?animationData:''}}" wx:if="{{checkIndex==index}}" scroll-y>
+      <!-- 修改输入框区域 -->
+      <view class="modify-item" wx:for="{{modifyItem}}" wx:key="ind" wx:for-index='ind'>
+        <text>{{item.title}}</text>
+        <input value="{{userinfo[index][item.key]}}" bindinput="changeInfo" data-index="{{index}}" data-key="{{item.key}}"></input>
+      </view>
+      <!-- 保存按钮区域 -->
+      <view class="but-area">
+        <view style="background-color:#e64f80" bindtap="updateText" data-index="{{index}}">保存数据</view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+<!-- 权限管理列表 -->
+<view class="list" wx:if="{{selectNav.first == 2}}">
+  <view class="item-user-con" wx:for="{{userinfo}}" wx:key="index">                                
+    <!-- 内容简介-->   
+    <view class="item-user" data-index="{{index}}">
+      <text>{{item.realname}}</text>
+      <text>{{item.gender}}</text>
+      <text>{{item.campus}}</text>
+      <text>{{item.grade}}</text>
+      <!-- 管理员状态显示图标 -->
+      <image src="{{tools.isExist(item.organization,'ban')?'/icon/user/ban.png':'/icon/user/unban.png'}}" mode="aspectFit" catchtap="changeBan" data-index='{{index}}'></image>
+      <image src="{{tools.isExist(item.organization,'admin')?'/icon/user/admin-lock.png':'/icon/user/admin-unlock.png'}}" mode="aspectFit" catchtap="changeAdmin" data-index='{{index}}'></image>
+    </view>
+  </view>
+</view>
+
+<!-- 帖子管理列表 -->
+<view class="list" wx:if="{{selectNav.first == 3}}">
+  <!-- 搜索框区域 -->
+  <view class="search-area" wx:if="{{selectNav.second == 1}}">
+    <picker range="{{postItem}}" range-key="{{'title'}}" value="{{pickerIndex}}" bindchange="changePicker"><text>{{postItem[pickerIndex].title}}</text></picker>
+    <input bindinput="changeSearch" placeholder="{{postItem[pickerIndex].placeholder}}" value="{{searchValue}}"></input>
+    <view class="search-but" bindtap="search" data-kind="post">搜索</view>
+  </view>
+
+  <view class="item-post-con" wx:for="{{postinfo}}" wx:key="index">  
+    <!-- 内容简介-->                              
+    <view class="item-post" data-index="{{index}}" bindtap="checkCertificationimg" bindlongtap="jumpDeatil">
+      <text style="flex:1">【{{wallList[item.type]}}】</text>
+      <text style="flex:3">{{item.title}}</text>
+      <!-- 删除帖子图标 -->
+      
+    </view>
+    <scroll-view class="post-area" animation="{{checkIndex==index?animationData:''}}" wx:if="{{checkIndex==index}}" scroll-y>
+      <!-- 内容区域 -->
+      <view class="post-item" wx:for="{{postItem}}" wx:key="ind" wx:for-index='ind'>
+        <text style="flex:2">{{item.title}}:</text>
+        <text style="flex:8">{{tools.formatPost(item.key,postinfo[index][item.key])}}</text>
+      </view>
+      
+    </scroll-view>
+  </view>
+</view>
+
+<!-- 社团认证列表 -->
+<view class="list" wx:if="{{selectNav.first == 4}}">
+  
+  <view class="item-post-con" wx:for="{{communityinfo}}" wx:key="index">  
+    <!-- 内容简介-->                              
+    <view class="item-post" data-index="{{index}}" bindtap="checkCertificationimg">
+      <text>【{{item.data.clubname}}】</text>
+      <text wx:if="{{item.done}}">【{{item.pass?'通过':'未通过'}}】</text>
+    </view>
+    <scroll-view class="post-area" animation="{{checkIndex==index?animationData:''}}" wx:if="{{checkIndex==index}}" scroll-y>
+      <!-- 内容区域 -->
+      <view class="post-item" bindlongtap="jumpUser" data-openid="{{item.data.president}}">
+        <text style="flex:2">申请人:</text>
+        <text style="flex:7;word-break:break-all;">{{item.data.president}}</text>
+      </view>
+      <view class="post-item">
+        <text style="flex:2">社团名称:</text>
+        <text style="flex:7;word-break:break-all;">{{item.data.clubname}}</text>
+      </view>
+      <view class="post-item">
+        <text style="flex:2">个人介绍:</text>
+        <text style="flex:7;word-break:break-all;">{{item.data.certificationtext}}</text>
+      </view>
+      <view class="post-item">
+        <text style="flex:2">社团结构:</text>
+        <text style="flex:7;word-break:break-all;">{{item.data.structure}}</text>
+      </view>
+      <view class="post-item">
+        <text style="flex:2">认证图片:</text>
+        <view style="flex:7">
+          <image class="feedback-img" src="{{ite}}" wx:for="{{item.data.certificationimg}}" data-url="{{ite}}" wx:for-item = 'ite' mode="aspectFill" bindtap="onPreviewImage"></image>
+        </view>
+      </view>
+      <view class="but-area" wx:if="{{!item.done}}">
+        <view style="background-color:#67e667" bindtap="uploadCommunity" data-status="1" data-index="{{index}}">通过</view>
+        <view style="background-color:#e64f80" bindtap="uploadCommunity" data-status="0" data-index="{{index}}">不通过</view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+<!-- 用户反馈处理列表 -->
+<view class="list" wx:if="{{selectNav.first == 5}}">
+  
+  <view class="item-post-con" wx:for="{{feedbackinfo}}" wx:key="index">  
+    <!-- 内容简介-->                              
+    <view class="item-post" data-index="{{index}}" bindtap="checkCertificationimg">
+      <text>【{{item.type}}】</text>
+      <text>{{tools.formatPost('postedtime',item.feedbackedtime)}}</text>
+    </view>
+    <scroll-view class="post-area" animation="{{checkIndex==index?animationData:''}}" wx:if="{{checkIndex==index}}" scroll-y>
+      <!-- 内容区域 -->
+      <view class="post-item">
+        <text style="flex:1">内容:</text>
+        <text style="flex:6;word-break:break-all;">{{item.content}}</text>
+      </view>
+      <view class="post-item" wx:if="{{selectNav.first == 5}}">
+        <text style="flex:1">图片:</text>
+        <view style="flex:6">
+          <image class="feedback-img" src="{{ite}}" wx:for="{{item.image}}" data-url="{{ite}}" wx:for-item = 'ite' mode="aspectFill" bindtap="onPreviewImage"></image>
+        </view>
+      </view>
+      <view class="post-item">
+        <text style="flex:1">回复:</text>
+        <textarea style="flex:6;padding-top:4rpx" bindinput="changeReply" value="{{item.reply.content}}"></textarea>
+      </view>
+      <view class="but-area">
+        <view style="background-color:#e64f80" bindtap="uploadFeedbackReply" data-index="{{index}}">{{selectNav.second?'修改':'确认'}}回复</view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+
+<!-- 举报处理列表 -->
+<view class="list" wx:if="{{selectNav.first == 6}}">
+  
+  <view class="item-post-con" wx:for="{{reportinfo}}" wx:key="index">  
+    <!-- 内容简介-->                              
+    <view class="item-post" data-index="{{index}}" bindtap="checkCertificationimg" bindlongtap="jumpReport">
+      <text>【{{item.type=="comment"?'评论':'帖子'}}】</text>
+      <text>{{tools.formatPost('postedtime',item.reportedtime)}}</text>
+    </view>
+    <scroll-view class="post-area" animation="{{checkIndex==index?animationData:''}}" wx:if="{{checkIndex==index}}" scroll-y>
+      <!-- 内容区域 -->
+      <view class="post-item">
+        <text style="flex:1">理由:</text>
+        <text style="flex:5;word-break:break-all;">{{item.reason}}</text>
+      </view>
+      <view class="post-item" bindlongtap="jumpUser" data-openid="{{item.reportedby}}">
+        <text style="flex:1">举报者:</text>
+        <text style="flex:5;word-break:break-all;" data-id="{{item.reportedby}}">{{item.reportedby}}</text>
+      </view>
+      <view class="post-item" bindlongtap="jumpUser" data-openid="{{tools.slice(item.reportobj,item.reportobj.length-28)}}">
+        <text style="flex:1">被举报:</text>
+        <text style="flex:5;word-break:break-all;">{{tools.slice(item.reportobj,item.reportobj.length-28)}}</text>
+      </view>
+      <view class="post-item">
+        <text style="flex:1">回复:</text>
+        <textarea style="flex:5;padding-top:4rpx" bindinput="changeReply" value="{{item.reply.content}}"></textarea>
+      </view>
+      <view class="but-area">
+        <view style="background-color:#e64f80" bindtap="uploadReportReply" data-index="{{index}}">{{selectNav.second?'修改':'确认'}}回复</view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

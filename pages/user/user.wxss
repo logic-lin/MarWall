@@ -1,0 +1,86 @@
+/* pages/user/user.wxss */
+/* 主容器 */
+.user-main {
+  width: 750rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* 背景 */
+.user-bg {
+  width: 750rpx;
+  height: 300rpx;
+  background-color: #e64f80;
+}
+/* 卡片 */
+.user-card {
+  width: 660rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  position: relative;
+  top: -200rpx;
+}
+/* 用户信息 */
+.user-info {
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.user-avatar {
+  width: 140rpx;
+  height: 140rpx;
+  margin-top: 40rpx;
+  border-radius: 50%;
+  border: 1px solid #EEE;
+}
+.user-nickname-cert {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 30rpx;
+}
+.user-nickname {
+  font-size: 34rpx;
+  font-weight: bold;
+  margin-right: 25rpx;
+}
+.user-cert {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.user-cert-text {
+  font-size: 24rpx;
+  color: white;
+  margin: 5rpx 10rpx 5rpx;
+  border-radius: 5rpx;
+}
+/* 功能列表 */
+.user-func-list {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 30rpx 0rpx 30rpx;
+  border-top: 1px solid #EEE;
+}
+.user-func-item {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20rpx;
+}
+.user-func-icon {
+  width: 60rpx;
+  height: 60rpx;
+  margin-top: 20rpx;
+}
+.user-func-name {
+  margin-top: 20rpx;
+  font-size: 26rpx;
+}

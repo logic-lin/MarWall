@@ -1,0 +1,67 @@
+<view class="container">
+  <!-- 顶部红色区域 -->
+  <view class="info-top">
+    <!-- 头像/昵称 -->
+    <view class="info-top-top">
+      <image mode="aspectFill" src="{{userinfo.avatar}}" class="avatar" bindtap="onChooseImage"></image>
+      <text class="nickname"> {{userinfo.nickname}} </text>
+    </view>
+    <!-- 余额/认证 -->
+    <view class="info-top-bottom">
+      <view bindtap="onBalance">
+        <text style="margin-bottom:15rpx;">我的余额</text>
+        <text decode="{{true}}"> {{balance}}&nbsp;元</text>
+      </view>
+      <view>
+        <text style="margin-bottom:15rpx;">认证状态</text>
+        <text> {{userinfo.certification?'已认证':'未认证'}} </text>
+      </view>
+    </view>
+  </view>
+<!-- 中部非图片信息区域 -->
+  <view class="info-mid">
+    <view wx:for="{{item}}" wx:for-item="ite" class="item" wx:key ="index" style="{{modifyIndex==index?'top:-10rpx;left:-10rpx;box-shadow: 8rpx 8rpx 8rpx rgba(0, 0, 0, 0.1)':''}}">
+      <!-- 主题图标 -->
+      <view class="header">
+        <text> {{ite.header}} </text>
+         <!-- 上传图标 -->
+        <image wx:if="{{modifyIndex==index}}" src="/icon/user/save.png" class="modify" mode="aspectFit" bindtap="save"></image>
+         <!-- 修改图标 -->
+        <image src="{{modifyIndex==index?'/icon/user/cancel.png':'/icon/user/modify.png'}}" class="modify" mode="aspectFit" bindtap="modify" data-index='{{index}}'></image>
+      </view>
+      <!-- 文字信息 -->
+      <view wx:for="{{ite.detail}}" class="detail" wx:key="index" wx:for-index="ind" hidden="{{tmpInfo.tel==userinfo.tel&&item.key=='code'}}">
+        <!-- 标题 -->
+        <text class="title"> {{item.title}}：</text>
+        <!-- 文本输入框 -->
+        <input class="info" wx:if="{{item.range==null}}" data-key="{{item.key}}" disabled="{{modifyIndex!=index}}" value="{{tmpInfo[item.key]}}" bindinput="infoChange" type="{{item.key=='tel'||item.key=='qq'||item.key=='code'?'number':'text'}}" style="{{modifyIndex==index?'border-bottom:1rpx solid #ccc':''}}">
+          <!-- 获取验证码按钮 -->
+          <view wx:if="{{item.key=='code'}}" class="code-button" bindtap="getCode"> {{timer}} </view>
+        </input>
+        <!-- 选择输入框 -->
+        <picker wx:else range="{{item.range}}" bindchange="infoChange" data-key="{{item.key}}" data-detailindex="{{ind}}" data-itemindex="{{index}}" class="picker" disabled="{{modifyIndex!=index}}">
+          <input value="{{tmpInfo[item.key]}}" disabled style="{{modifyIndex==index?'border-bottom:1rpx solid #ccc':''}}"></input>
+        </picker>    
+      </view>
+    </view>
+  </view>
+<!-- 底部图片区域 -->
+  <view class="info-bottom">
+    <view class="item" style="{{modifyIndex == 2?'top:-10rpx;left:-10rpx;box-shadow: 8rpx 8rpx 8rpx rgba(0, 0, 0, 0.1)':''}}">
+      <view class="header">
+        <text>认证图片</text>
+        <!-- 上传图标 -->
+        <image wx:if="{{modifyIndex == 2}}" src="/icon/user/save.png" class="modify" mode="aspectFit" bindtap="updateImg"></image>
+         <!-- 修改图标 -->
+        <image wx:if="{{!userinfo.certification}}" src="{{modifyIndex == 2?'/icon/user/cancel.png':'/icon/user/modify.png'}}" class="modify" mode="aspectFit" bindtap="modify" data-index='2'></image>
+      </view>
+      <!-- 认证照片展示 -->
+      <view class="photo">
+        <icon type='cancel' class="delete-icon" catchtap="cancelCertify" wx:if="{{tmpInfo.certificationimg&&modifyIndex == 2}}"></icon>
+        <image wx:if="{{tmpInfo.certificationimg}}" src="{{tmpInfo.certificationimg}}" mode="widthFix" style="width:80%"></image>
+        <image wx:else src="/icon/release/uploadImage.png" mode="widthFix"  bindtap="chooseCertify" style="width:150rpx"></image>
+      </view>
+    </view>    
+  </view>
+</view>
+

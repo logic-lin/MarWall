@@ -1,0 +1,56 @@
+
+<wxs src="../../../utils/tools.wxs" module="tools"/>
+<view wx:if="{{community}}">
+  <view class="nav">
+    <view class="nav-detail {{selectNav == index?'select':''}}" wx:for="{{nav}}" wx:key="index" data-index="{{index}}" bindtap="changeNav">{{item}}</view>
+  </view>
+  <view wx:for="{{community.member}}" class="info-con">
+    <memberinfo memberinfo="{{item}}" structure="{{community.structure}}" memberindex="{{index}}" _id="{{community._id}}" sortKey="{{selectNav}}" adminlist='{{community.admin}}'></memberinfo>
+  </view>
+  
+</view>
+
+<!-- 反馈类型：意见建议/BUG反馈 -->
+<view class="request-area" wx:else>
+  <view class="container shadow">
+	<!-- 类型选择 -->
+    <!-- <view class="form-container">
+      <view class="title">
+        <text> 类型 </text>
+        <image class="required-icon" src="../../../icon/release/required.png" mode="widthFix"></image>
+      </view>
+      <picker bindchange="pickerChange" value="{{typeIndex}}" range="{{typeRange}}">
+        <input class="picker-placeholder" placeholder="请选择反馈类型" placeholder-style="font-size:28rpx;" disabled="true" value="{{typeIndex?typeRange[typeIndex]:''}}"></input>
+      </picker>
+    </view> -->
+    <!-- 内容填写 -->
+    <view class="form-container">
+      <text style="flex:1"> 社团名称 </text>
+      <input style="flex:4" value="{{certificationForm.clubname}}" placeholder="请写下社团名称" placeholder-style="font-size:28rpx;" data-key="clubname" bindinput="input"></input>
+    </view>
+    <view class="form-container">
+			<text style="flex:1"> 个人介绍 </text>
+      <textarea style="flex:4;padding-top:6rpx" value="{{certificationForm.certificationtext}}" placeholder="请写下个人介绍" maxlength="-1" placeholder-style="font-size:28rpx" data-key="certificationtext" bindinput="input"></textarea>
+    </view>
+    <view class="form-container">
+      <text style="flex:1"> 职位结构</text>
+      <view style="flex:4;padding-top:6rpx">
+        <textarea placeholder="请写下社团结构，用英文逗号分割，格式如:社长,副会长,部长,副部长,成员" value="{{certificationForm.structure}}" maxlength="-1" placeholder-style="font-size:28rpx;" data-key="structure" bindinput="input"></textarea>
+      </view>
+    </view>
+    <!-- 图片选择 -->
+    <view class="form-container">
+      <text style="flex:1"> 认证图片 </text>
+      <view style="flex:4" class="upload-image-container">
+        <image class="upload-image" src="{{item}}" mode="aspectFill" bindtap="onChooseImage" data-index="{{index}}" wx:for="{{tmpImgList}}" wx:key="index" wx:if="{{index<9}}">
+          <icon class="cancel-icon" color="#2e2e2e" type="cancel" size="20" catchtap="onDeleteImage" data-index="{{index}}" wx:if="{{index<tmpImgList.length-1}}"></icon>
+        </image>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提交按钮 -->
+  <view class="release-botton shadow" bindtap="onupload">
+    <text> 提交 </text>
+  </view>
+</view>

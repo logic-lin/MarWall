@@ -1,0 +1,25 @@
+<!--pages/square/square.wxml-->
+<!-- 主容器 -->
+<view class="square-main">
+  <!-- 选择栏 -->
+  <view class="square-select">
+    <!-- 标签选择 -->
+    <view class="square-select-label-list" wx:if="{{label.length>1}}">
+        <view class="square-select-label-item" bindtap="onLabel" data-index="{{index}}" style="{{label_index==index?'color:#ec7ca0;':''}}" wx:for="{{label}}" wx:key="index">
+          <text class="{{label_index==index?'select':''}}" style="padding:8rpx 0rpx 8rpx;"> {{item}} </text>
+        </view>
+    </view>
+    <!-- 排序选择 -->
+    <view class="square-select-order-list"  wx:if="{{order.length>0}}">
+      <view class="square-select-order-item" bindtap="onOrder" data-index="{{index}}" style="{{order_index==index?'color:#ec7ca0;':''}}" wx:for="{{order}}" wx:key="index">
+        <text class="{{order_index==index?'select':''}}" style="padding:8rpx 0rpx 8rpx;"> {{item}} </text>
+      </view>
+    </view>
+  </view>
+  <!-- 卡片列表 -->
+  <view class="square-post-list">
+    <post class="square-post-item" post="{{item}}" data-postid="{{item.postid}}" bindtap="onPost" wx:for="{{post}}" wx:key="index"></post>
+  </view>
+  <!-- 加载更多的提示 -->
+  <view class="load-more-status"> {{loadMoreStatus}} </view>
+</view>

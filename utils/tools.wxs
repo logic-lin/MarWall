@@ -1,0 +1,38 @@
+var isExist = function(arr,target){
+  console.log(arr,target)
+  var a = [].concat(arr)
+  return a.indexOf(target)!=-1?true:false
+}
+var formatNumber = function(n){
+  return n<10?'0'+n:''+n
+}
+var formatPost = function(attribute,value){
+  
+  switch(attribute){
+    case 'price':
+      return value+'￥'
+    case 'anonymous':
+      return value?'是':'否'
+    case 'postedtime': 
+      var date = getDate(value)
+      var year = date.getFullYear()+'年'
+      var month = date.getMonth() + 1+'月'
+      var day = date.getDate()+'日'
+      var hour = formatNumber(date.getHours())+':'
+      var minute = formatNumber(date.getMinutes())+':'
+      var second = formatNumber(date.getSeconds())
+      return year+month+day+' '+hour+minute+second
+    default:
+      return value
+     
+  }
+}
+var slice = function(str,start){
+  
+  return str.slice(start,str.length)
+}
+module.exports = {
+  isExist: isExist,
+  formatPost:formatPost,
+  slice:slice
+}

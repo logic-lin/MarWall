@@ -1,0 +1,52 @@
+<!--pages/discover/discover.wxml-->
+<!-- 主容器 -->
+<view class="discover-main">
+	<!-- 通知信息 -->
+	<view class="discover-inform">
+		<image class="discover-inform-icon" src="/icon/discover/inform-active.png"></image>
+		<text class="discover-inform-title"> 通知： </text>
+		<swiper class="discover-inform-swiper" autoplay circular vertical>
+			<swiper-item class="discover-inform-swiper-item" wx:for="{{inform}}" wx:key="index">
+				<text class="discover-inform-text"> {{item}} </text>
+			</swiper-item>
+		</swiper>
+	</view>
+	<!-- 墙的列表 -->
+	<view class="discover-wall-list">
+		<view class="discover-wall-item shadow" data-index="{{index}}" wx:for="{{wall}}" wx:key="index" wx:if="{{index<6}}" bindtap="onWall">
+			<image class="discover-wall-icon" mode="aspectFit" src="{{item.icon}}"></image>
+			<text class="discover-wall-name"> {{item.name}} </text>
+		</view>
+	</view>
+	<!-- 树洞(独立出来看着对称) -->
+	<view class="discover-hole shadow" data-index="{{6}}" bindtap="onWall">
+		<image class="discover-wall-icon" mode="aspectFit" src="{{wall[6].icon}}"></image>
+		<text class="discover-wall-name"> {{wall[6].name}} </text>
+	</view>
+	<!-- 颜文字 -->
+	<text style="font-size:26rpx;" bindtap="onExpression" wx:if="{{!sleepy}}"> (๑•̀ㅂ•́)و✧ </text>
+	<text style="font-size:26rpx;" bindtap="onExpression" wx:if="{{sleepy}}"> (￣o￣) . z Z </text>
+	<view class="discover-eelease shadow" bindtap="popUp">
+		<text class="discover-eelease-text"> 发 布 </text>
+	</view>
+</view>
+<!-- 弹出的页面 -->
+<view catchtouchmove="true" class="pop-up-page {{isPopUp?'show-pop-up-page':''}}">
+	<view class="pop-up-dialogue">
+		<view class="pop-up-title">选择发布</view>
+		<view class="pop-up-container">
+			<view style="height:20rpx;width:100%"></view>
+			<!-- wall -->
+			<view class="discover-wall-item shadow pop-up-item" data-index="{{index}}" wx:for="{{wall}}" wx:key="index" wx:if="{{index<6}}" bindtap="intoRelease">
+				<image class="discover-wall-icon" style="width:80rpx;margin-left:25rpx;margin-right:20rpx;" mode="aspectFit" src="{{item.icon}}"></image>
+				<text class="discover-wall-name"> {{item.name}} </text>
+			</view>
+			<!-- hole -->
+			<view class="discover-wall-item shadow pop-up-item" data-index="{{6}}" bindtap="intoRelease" style="width:570rpx;justify-content:center;">
+				<image class="discover-wall-icon" style="width:80rpx;margin-left:25rpx;margin-right:20rpx;" mode="aspectFit" src="{{wall[6].icon}}"></image>
+				<text class="discover-wall-name"> {{wall[6].name}} </text>
+			</view>
+		</view>
+		<view class="pop-up-close" bindtap="popUp"></view>
+	</view>
+</view>

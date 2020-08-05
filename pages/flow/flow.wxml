@@ -1,0 +1,16 @@
+<!--pages/flow/flow.wxml-->
+<!-- 主容器 -->
+<view class="flow-main">
+  <!-- 排序选择 -->
+  <view class="flow-select-order-list"  wx:if="{{order.length>0}}">
+    <view class="flow-select-order-item" bindtap="onOrder" data-index="{{index}}" style="{{order_index==index?'color:#ec7ca0;':''}}" wx:for="{{order}}" wx:key="index">
+      <text class="{{order_index==index?'select':''}}" style="padding:8rpx 0rpx 8rpx;"> {{item}} </text>
+    </view>
+  </view>
+  <!-- 卡片列表 -->
+  <view class="flow-flowpost-list">
+    <flowpost class="flow-post-item" post="{{item}}" data-postid="{{item.postid}}" bindtap="onPost" wx:for="{{post}}" wx:key="index"></flowpost>
+  </view>
+  <!-- 加载更多的提示 -->
+  <view class="load-more-status"> {{loadMoreStatus}} </view>
+</view>

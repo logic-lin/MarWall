@@ -1,0 +1,182 @@
+/* pages/discover/discover.wxss */
+/* 主页面 */
+page {
+  background-color: #f1f1f1;
+}
+/* 主容器 */
+.discover-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* 通知信息 */
+.discover-inform {
+  width: 680rpx;
+  font-size: 25rpx;
+  display: flex;
+  align-items: center;
+  background-color: #FEFBFC;
+  color: #E64F80;
+  border-radius: 20rpx;
+  margin: 20rpx 15rpx 10rpx;
+}
+.discover-inform-icon {
+  width: 30rpx;
+  height: 0;
+  margin: 10rpx 10rpx 5rpx;
+}
+.discover-inform-swiper {
+  width: 530rpx;
+  height: 60rpx;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+.discover-inform-swiper-item {
+  display: flex;
+  align-items: center;
+}
+.discover-inform-title {
+  width: 80rpx;
+}
+/* 墙的列表 */
+.discover-wall-list {
+  width: 660rpx;
+  font-size: 32rpx;
+  flex-wrap: wrap;
+  display: flex;
+}
+.discover-wall-item {
+  width: 300rpx;
+  height: 175rpx;
+  margin: 30rpx 15rpx 15rpx;
+  border-radius: 7rpx;
+  background-color: #FEFBFC;
+  display: flex;
+  align-items: center;
+}
+.discover-wall-icon {
+  width: 70rpx;
+  height: 70rpx;
+  margin: 10rpx 25rpx 10rpx 40rpx;
+}
+.discover-wall-name {
+  width: 145rpx;
+  font-size: 32rpx;
+}
+/* 树洞 */
+.discover-hole {
+  width: 630rpx;
+  height: 170rpx;
+  margin: 20rpx 0rpx 30rpx;
+  border-radius: 10rpx;
+  background-color: #FEFBFC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+}
+/* 发布按钮 */
+.discover-eelease {
+  width: 200rpx;
+  height: 60rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  margin-top: 5rpx;
+}
+.discover-eelease-text {
+  font-size: 28rpx;
+}
+/* 发布弹窗 */
+.pop-up-page{
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 1111;
+	opacity: 0;
+	/* outline: 0; */
+	text-align: center;
+	/* -ms-transform: scale(1.185); */
+	transform: scale(1.185);
+	/* backface-visibility: hidden; */
+	/* perspective: 2000rpx; */
+	background: rgba(0, 0, 0, 0.6);
+	transition: all 0.3s ease-in-out 0s;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pop-up-page.show-pop-up-page {
+	opacity: 1;
+	transition-duration: 0.2s;
+  /* -ms-transform: scale(1); */
+	transform: scale(1);
+	/* overflow-x: hidden;
+	overflow-y: auto; */
+	pointer-events: auto;
+}
+.pop-up-dialogue {
+  position: relative;
+  width: 85%;
+  height: 900rpx;
+  border-radius: 10rpx;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.pop-up-title {
+  width: 100%;
+  height: 80rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #2e2e2e;
+  font-size: 34rpx;
+  font-weight: 400;
+}
+.pop-up-container{
+  background-color: #f1f1f1;
+  width: 100%;
+  flex: 2;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  /* align-items: center; */
+  align-content: flex-start;
+}
+.pop-up-item{
+  width: 270rpx;
+  height: 140rpx;
+  margin: 10rpx 15rpx 30rpx;
+}
+.pop-up-close{
+  width: 100%;
+  height: 41rpx;
+  position: absolute;
+  bottom: 0;
+}
+.pop-up-container::after, .pop-up-container::before{
+  content: '';
+  height: 40rpx;
+  border-right: solid 1rpx rgb(0, 0, 0);
+  position: absolute;
+  bottom: 12rpx;
+  left: 50%;
+  transform: rotate(45deg);
+}
+.pop-up-container::before {
+  content: '';
+  transform: rotate(-45deg);
+}
+/* 阴影 */
+.shadow{
+  box-shadow: 0 10rpx 30rpx -15rpx rgba(0, 0, 0, 0.2);
+}

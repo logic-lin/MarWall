@@ -1,0 +1,83 @@
+/* components/post/post.wxss */
+/* 主容器 */
+.post-main {
+  width: 720rpx;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10rpx;
+  margin-top: 10rpx;
+  margin-bottom: 20rpx;
+}
+
+/* 中部布局 */
+.post-mid {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.post-title {
+  width: 100%;
+  margin: 10rpx 0 10rpx;
+  font-size: 33rpx;
+  font-weight: 500;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.post-content {
+  width: 100%;
+  font-size: 28rpx;
+  font-weight: 400;
+  margin-top: 10rpx;
+  margin-bottom: 20rpx;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: #58646b;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.post-image-list {
+  width: 95%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+.post-image-item {
+  width: 165rpx;
+  height: 165rpx;
+  margin: 15rpx 15rpx 0rpx;
+  background-color: #EEE;
+}
+/* 底部布局 */
+.post-bottom {
+  position: relative;
+  width: 90%;
+  height: 60rpx;
+  font-size: 27rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15rpx;
+}
+.bottom-button{
+  width: 200rpx;
+  height: 55rpx;
+  color: white;
+  font-weight: bold;
+  background-color: #E64F80;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* 阴影 */
+.shadow{
+  box-shadow: 0 10rpx 30rpx -15rpx rgba(0, 0, 0, 0.2);
+}

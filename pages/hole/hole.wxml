@@ -1,0 +1,11 @@
+<!--pages/hole/hole.wxml-->
+<!-- 主容器 -->
+<view class="hole-main">
+  <!-- 列表栏 -->
+  <view class="hole-experiment-list">
+    <view class="hole-experiment-item shadow" bindtap="onWall" data-index="{{index}}" wx:for="{{experiments}}" wx:key="index">
+      <image class="hole-experiment-icon" src="{{item.icon}}" mode="aspectFit"></image>
+      <text class="hole-experiment-name"> {{item.name}} </text>
+    </view>
+  </view>
+</view>

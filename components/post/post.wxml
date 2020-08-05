@@ -1,0 +1,69 @@
+<!--components/post/post.wxml-->
+<view class="post-main shadow">
+	<!-- 顶部布局 (horizontal) -->
+	<view class="post-top">
+		<!-- 头像 -->
+		<view class="post-avatar">
+			<image class="post-avatar-img" mode="aspectFill" src="{{post.anonymous?'/icon/user/avatar-default.png':poster.avatar}}"></image>
+		</view>
+		<!-- 昵称 + 标签 + 时间 -->
+		<view class="post-top-right">
+			<!-- 昵称 + 标签(如果有) -->
+			<view class="post-nickname-and-labels">
+				<!-- 昵称 -->
+				<text class="post-nickname"> {{(post.anonymous||!poster.nickname)?'匿名者':poster.nickname}} </text>
+				<!-- 标签(如果有) -->
+				<view class="post-label-list">
+					<view class="post-label-item" wx:for="{{post.label}}" wx:key="index">
+						<text class="post-label-name"> {{item}} </text>
+					</view>
+				</view>
+			</view>
+			<!-- 时间 -->
+			<text class="post-postedtime"> {{postedtime}} </text>
+		</view>
+		<!-- 价格信息（如果有） -->
+		<view class="post-price">
+			<text class="post-price-number" wx:if="{{price}}"> ￥{{price}} </text>
+		</view>
+	</view>
+	<!-- 中部布局 (vertical) -->
+	<view class="post-mid">
+		<!-- 标题 (加粗 | 仅显示前 1 行) -->
+		<text class="post-title"> {{post.title}} </text>
+		<!-- 内容 (仅显示前 2 行) -->
+		<text class="post-content"> {{post.content}} </text>
+		<!-- 图片 (仅显示前 3 张) -->
+		<view class="post-image-list" wx:if="{{post.image.length>0}}">
+			<!-- 这里用 wx:for -->
+			<image class="post-image-item" mode="aspectFill" src="{{item}}" wx:for="{{post.image}}" wx:key="index" wx:if="{{index<3}}"></image>
+		</view>
+	</view>
+	<!-- 底部布局 -->
+	<view class="post-bottom">
+		<!-- 互动 -->
+		<view class="post-interactive">
+			<!-- 热度 -->
+			<view class="post-interactive-item">
+				<!-- 图标 -->
+				<image class="post-interactive-icon" mode="aspectFill" src="/icon/square/view.png"></image>
+				<!-- 文字 -->
+				<text class="post-interactive-text"> {{post.status.view.length}} </text>
+			</view>
+			<!-- 点赞 -->
+			<view class="post-interactive-item">
+				<!-- 图标 -->
+				<image class="post-interactive-icon" mode="aspectFill" src="/icon/square/like-active.png"></image>
+				<!-- 文字 -->
+				<text class="post-interactive-text"> {{post.status.like.length}} </text>
+			</view>
+			<!-- 评论 -->
+			<view class="post-interactive-item">
+				<!-- 图标 -->
+				<image class="post-interactive-icon" mode="aspectFill" src="/icon/square/comment-active.png"></image>
+				<!-- 文字 -->
+				<text class="post-interactive-text"> {{post.status.comment.length}} </text>
+			</view>
+		</view>
+	</view>
+</view>

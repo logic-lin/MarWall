@@ -1,0 +1,158 @@
+<!--pages/details/details.wxml-->
+<view class="details-main">
+  <!-- 顶部布局 (horizontal) -->
+  <view class="details-top">
+    <!-- 头像 -->
+    <image class="details-avatar" src="{{loaded?(post.anonymous?'/icon/user/avatar-default.png':poster.avatar):''}}" bindlongpress="onAvatar"></image>
+    <!-- 昵称 + 标签 (vertical) -->
+    <view class="details-nickname-and-labels">
+      <!-- 昵称 -->
+      <text class="details-nickname"> {{loaded?(post.anonymous?'匿名者':poster.nickname):'---'}} </text>
+      <!-- 标签 (如果有) -->
+      <view class="details-label-list">
+        <view class="details-label-item" wx:for="{{post.label}}" wx:key="index">
+          <text class="details-label-name"> {{item}} </text>
+        </view>
+      </view>
+    </view>
+    <!-- 价格信息（如果有） -->
+    <view class="details-price">
+      <text class="details-price-number" wx:if="{{loaded&&price}}"> ￥{{post.price}} </text>
+    </view>
+  </view>
+  <!-- 中部布局 (vertical) -->
+  <view class="details-mid">
+    <!-- 标题 (加粗) -->
+    <text class="details-title"> {{loaded?post.title:'---'}} </text>
+    <!-- 发布时间 -->
+    <text class="details-postedtime"> 发布时间：{{loaded?postedtime:'---'}} </text>
+    <!-- 内容 -->
+    <text class="details-content"> {{loaded?post.content:'...'}} </text>
+    <!-- 图片 -->
+    <view class="details-image-list">
+      <image class="details-image-item" src="{{item}}" mode="aspectFill" wx:for="{{post.image}}" wx:key="index" data-index="{{index}}" bindtap="onPreviewImage"></image>
+    </view>
+  </view>
+  <!-- 底部布局 -->
+  <view class="details-bottom">
+    <!-- 热度 -->
+    <view class="details-interactive-item">
+      <!-- 图标 -->
+      <image class="details-interactive-icon" src="/icon/square/view.png"></image>
+      <!-- 文字 -->
+      <text decode="{{true}}" class="details-interactive-text"> 热度&nbsp;&nbsp;{{post.status.view.length}} </text>
+    </view>
+    <!-- 互动 -->
+    <view class="details-interactive">
+      <!-- 删除 -->
+      <view class="details-interactive-item" bindtap="onDelete" wx:if="{{canDelete}}">
+        <!-- 图标 -->
+        <image class="details-interactive-icon" src="/icon/square/delete-active.png"></image>
+        <!-- 文字 -->
+        <text decode="{{true}}" class="details-interactive-text"> 删除 </text>
+      </view>
+      <!-- 举报 -->
+      <view class="details-interactive-item" bindtap="onReport" wx:if="{{canReport}}">
+        <!-- 图标 -->
+        <image class="details-interactive-icon" src="/icon/square/report-active.png"></image>
+        <!-- 文字 -->
+        <text decode="{{true}}" class="details-interactive-text"> 举报 </text>
+      </view>
+      <!-- 点赞 -->
+      <view class="details-interactive-item" bindtap="onLike">
+        <!-- 图标 -->
+        <image class="details-interactive-icon" src="/icon/square/like-active.png"></image>
+        <!-- 文字 -->
+        <text decode="{{true}}" class="details-interactive-text"> 点赞&nbsp;&nbsp;{{post.status.like.length}} </text>
+      </view>
+      <!-- 评论 -->
+      <view class="details-interactive-item">
+        <!-- 图标 -->
+        <image class="details-interactive-icon" src="/icon/square/comment-active.png"></image>
+        <!-- 文字 -->
+        <text decode="{{true}}" class="details-interactive-text"> 评论&nbsp;&nbsp;{{post.status.comment.length}} </text>
+      </view>
+    </view>
+  </view>
+  <!-- 评论区 -->
+  <view class="details-comment-area">
+    <view class="details-comment-area-bar">
+      <image class="details-comment-area-icon" src="/icon/details/commentArea-active.png"></image>
+      <text class="details-comment-area-name"> 评论区 </text>
+    </view>
+    <view class="details-comment-area-list" style="{{checkComment?'border:2rpx solid red':''}}">
+      <comment class="details-comment-area-item" commentid="{{item}}" poster="{{poster.openid}}" wx:for="{{comment}}" wx:key="index" wx:if="{{!checkComment||checkComment == item}}"></comment>
+    </view>
+  </view>
+  <!-- 结尾 -->
+  <view class="details-comment-endline">
+    <text class="details-comment-endline-text"> 。゜゜(´Ｏ`) ゜゜。到底啦 ~ </text>
+  </view>
+  <!-- 评论框 -->
+	<view class="details-comment-input">
+    <!-- 文字域 -->
+    <view class="details-comment-text">
+      <!-- 输入框 -->
+      <view class="details-comment-input-write-view">
+        <textarea class="details-comment-input-write" maxlength="140" fixed="true" auto-height="true" value="{{inputText}}" placeholder="快来留下你的评论吧 ~" confirm-type="send" bindconfirm="onPutComment" bindinput="onSetInput" ></textarea>
+      </view>
+      <!-- 上传图片按钮 -->
+      <image class="upload-icon" src="/icon/details/uploadImage.png" mode="aspectFit" bindtap="onUploadImage"></image>
+      <!-- 发送评论按钮 -->
+      <view class="details-comment-input-put-view" bindtap="onPutComment">
+        <text class="details-comment-input-put-text"> 发送 </text>
+      </view>
+    </view>
+    <!-- 图片域 -->
+    <view class="details-comment-input-image-list" wx:if="{{tmpImgList.length}}">
+      <image class="details-comment-input-image" src="{{item}}" mode="aspectFill" wx:for="{{tmpImgList}}" wx:key="index">
+        <icon class="cancel-icon" color="#2e2e2e" type="cancel" size="20" catchtap="onDeleteImage" data-index="{{index}}"></icon>
+      </image>
+    </view>
+	</view>
+  <!-- 举报帖子 -->
+  <view class="details-comment-application {{isPopUpReport?'show-details-comment-application':''}}" wx:if="{{loaded&&isPopUpReport}}">
+    <view class="details-comment-application-view">
+      <!-- 请求理由 -->
+      <view class="details-comment-application-input-view">
+        <textarea class="details-comment-application-input" fixed="true"  maxlength="140" value="{{applyReason}}" placeholder="请填写举报理由" placeholder-style="font-size:27rpx" bindconfirm="commentStatus" bindinput="onSetApplyReason"></textarea>
+      </view>
+      <!-- 确认按钮 -->
+      <view class="details-comment-application-put" bindtap="onUploadReport" data-type="{{'report'}}">
+        <text class="details-comment-application-put-text"> 确认举报 </text>
+      </view>
+      <!-- 取消按钮 -->
+      <icon class="details-comment-application-cancel-icon" color="#424242" type="cancel" bindtap="onCancelApply" size="24"></icon>
+    </view>
+  </view>
+  <!-- 请求信息 -->
+  <view class="details-comment-application {{isPopUp?'show-details-comment-application':''}}" wx:if="{{loaded&&isPopUp}}">
+    <view class="details-comment-application-view">
+      <!-- 请求理由 -->
+      <view class="details-comment-application-input-view">
+        <textarea class="details-comment-application-input" fixed="true"  maxlength="140" value="{{applyReason}}" placeholder="请填写申请理由" placeholder-style="font-size:27rpx" bindconfirm="commentStatus" bindinput="onSetApplyReason"></textarea>
+      </view>
+      <!-- 确认按钮 -->
+      <view class="details-comment-application-put" bindtap="onUploadCheck" data-type="{{'userinfo'}}">
+        <text class="details-comment-application-put-text"> 确认申请 </text>
+      </view>
+      <!-- 取消按钮 -->
+      <icon class="details-comment-application-cancel-icon" color="#424242" type="cancel" bindtap="onCancelApply" size="24"></icon>
+    </view>
+  </view>
+  <!-- 请求社团 -->
+  <view class="details-comment-application {{isPopUpJoinCommunity?'show-details-comment-application':''}}" wx:if="{{loaded&&isPopUpJoinCommunity}}">
+    <view class="details-comment-application-view">
+      <!-- 请求理由 -->
+      <view class="details-comment-application-input-view">
+        <textarea class="details-comment-application-input" fixed="true"  maxlength="140" value="{{applyReason}}" placeholder="请填写申请理由" placeholder-style="font-size:27rpx" bindconfirm="commentStatus" bindinput="onSetApplyReason"></textarea>
+      </view>
+      <!-- 确认按钮 -->
+      <view class="details-comment-application-put" bindtap="onUploadCheck" data-type="{{'joinCommunity'}}">
+        <text class="details-comment-application-put-text"> 确认申请 </text>
+      </view>
+      <!-- 取消按钮 -->
+      <icon class="details-comment-application-cancel-icon" color="#424242" type="cancel" bindtap="onCancelApply" size="24"></icon>
+    </view>
+  </view>
+</view>

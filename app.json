@@ -1,0 +1,53 @@
+{
+  "pages": [
+    "pages/discover/discover",
+    "pages/user/user",
+    "pages/user/inform/inform",
+    "pages/discover/square/details/details",
+    "pages/user/balance/balance",
+    "pages/user/info/info",
+    "pages/user/register/register",
+    "pages/discover/square/square",
+    "pages/discover/release/release",
+    "pages/flow/flow",
+    "pages/hole/hole",
+    "pages/user/about/about",
+    "pages/user/community/community",
+    "pages/user/feedback/feedback",
+    "pages/user/admin/admin",
+    "pages/user/send/send"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#E64F80",
+    "navigationBarTitleText": "Marwall",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#515151",
+    "selectedColor": "#E64F80",
+    "borderStyle": "black",
+    "list": [
+      {
+        "text": "综合",
+        "iconPath": "icon/tabbar/message.png",
+        "selectedIconPath": "icon/tabbar/message-active.png",
+        "pagePath": "pages/flow/flow"
+      },
+      {
+        "text": "发现",
+        "iconPath": "icon/tabbar/discover.png",
+        "selectedIconPath": "icon/tabbar/discover-active.png",
+        "pagePath": "pages/discover/discover"
+      },
+      {
+        "text": "我的",
+        "iconPath": "icon/tabbar/user.png",
+        "selectedIconPath": "icon/tabbar/user-active.png",
+        "pagePath": "pages/user/user"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

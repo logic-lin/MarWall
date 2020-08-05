@@ -1,0 +1,33 @@
+<wxs src="../../utils/tools.wxs" module="tools"/>
+<view class="con" wx:if="{{sortKey==0||tools.isExist(adminlist,memberinfo.openid)}}">
+  <view class="briefItem" bindtap="getMore">
+    <view>
+      <text>【{{position}}】</text>
+      <text>{{userinfo.realname}}</text>
+    </view>
+    <image mode="aspectFit" catchtap="changeAdmin" src="{{tools.isExist(adminlist,memberinfo.openid)?'/icon/user/admin-lock.png':'/icon/user/admin-unlock.png'}}"></image>
+  </view>
+  <scroll-view class="morelist" wx:if="{{more}}" animation="{{animationData}}" scroll-y>
+    <view class="moreItem">
+      <view style="flex:1;display:flex;align-items:center;">
+        <text>职位</text>
+      </view>
+      <view style="flex:4">
+        <text>{{position}}</text>
+        <picker range="{{structure}}" bindchange="changePosition">
+          <view class="but">变更</view>
+        </picker>
+      </view>
+      
+      
+    </view>
+    <view wx:for="{{list}}" wx:key="index" class="moreItem">
+      <text style="flex:1">{{item.title}}</text>
+      <text style="flex:4">{{userinfo[item.key]}}</text>
+    </view>
+    <view class="moreItem">
+      <text style="flex:1">加入时间</text>
+      <text style="flex:4">{{tools.formatPost('postedtime',jointime)}}</text>
+    </view>
+  </scroll-view>
+</view>

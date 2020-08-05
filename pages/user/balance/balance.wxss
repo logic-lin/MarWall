@@ -1,0 +1,74 @@
+/* pages/user/balance/balance.wxss */
+/* 基础 */
+.vbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hbox {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+.center {
+  justify-content: center;
+}
+.between {
+  justify-content: space-between;
+}
+.start {
+  justify-content: flex-start;
+}
+.end {
+  justify-content: end;
+}
+.border {
+  border:1px solid #eeeeee;
+}
+.full-width {
+  width: 100%;
+}
+.major-width {
+  width: 90%;
+}
+.frame {
+  width: 90%;
+  height: 90%;
+}
+/* 扩展 */
+page {
+  background-color: #eeeeee;
+}
+.main {
+  width: 750rpx;
+  font-size: 32rpx;
+}
+.item {
+  width: 90%;
+}
+.title {
+  width: 30%;
+}
+.content {
+  width: 70%;
+}
+.money {
+  color: red;
+}
+.input {
+  width: 400rpx;
+  color: #cccccc;
+  font-size: 28rpx;
+  margin-left: 30rpx;
+}
+.btn {
+  font-size: 28rpx;
+  padding: 6rpx 30rpx 6rpx;
+  margin-right: 30rpx;
+  background-color: #cccccc;
+  color: white;
+}
+.shadow{
+  box-shadow: 0 10rpx 30rpx -15rpx rgba(0, 0, 0, 0.2);
+}

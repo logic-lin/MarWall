@@ -1,0 +1,112 @@
+/* components/flowpost/flowpost.wxss */
+/* 主容器 */
+.flowpost-main {
+  width: 375rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10rpx 0rpx 20rpx;
+}
+/* 卡片 */
+.flowpost-card {
+  position: relative;
+  width: 340rpx;
+  margin: 10rpx 10rpx 5rpx;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* 配图域 */
+.flowpost-image-view {
+  width: 320rpx;
+  height: 320rpx;
+  margin: 10rpx 10rpx 5rpx;
+  border: 1px solid #eeeeee;
+  background-color: #eeeeee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.flowpost-image-view-image {
+  width: inherit;
+  height: inherit;
+}
+/* 浮动标签 */
+.flowpost-float-label {
+  position: absolute;
+  top: 0rpx;
+  left: 0rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.flowpost-float-label-text {
+  font-size: 23rpx;
+  color: white;
+  margin: 5rpx 10rpx 5rpx;
+}
+/* 信息域 */
+.flowpost-info-view {
+  width: 310rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+/* 标题 */
+.flowpost-title {
+  width: 100%;
+  font-size: 27rpx;
+  font-weight: bold;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  margin-bottom: 15rpx;
+}
+/* 标签/价格 */
+.flowpost-label-price {
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10rpx;
+}
+/* 标签 */
+.flowpost-label-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 10rpx;
+}
+.flowpost-label-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #e64f80;
+  border-radius: 5rpx;
+  border-radius: 10rpx;
+}
+.flowpost-label-name {
+  font-size: 20rpx;
+  margin: 5rpx 15rpx 5rpx;
+  color: white;
+}
+/* 价格 */
+.flowpost-price-text {
+  font-size: 27rpx;
+  color: red;
+  margin-right: 10rpx;
+}
+/* 阴影 */
+.shadow{
+  box-shadow: 0 10rpx 30rpx -15rpx rgba(0, 0, 0, 0.2);
+}

@@ -1,0 +1,74 @@
+/* pages/square/square.wxss */
+/* 主页面 */
+page {
+  background-color: #EEE;
+  height: 100%;
+}
+/* 主容器 */
+.square-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* 顶部栏 */
+.square-bar {
+  width: 720rpx;
+  display: flex;
+  align-items: center;
+  border-radius: 15rpx;
+  background-color: white;
+  margin-top: 20rpx;
+}
+.square-bar-icon {
+  width: 30rpx;
+  height: 30rpx;
+  margin: 10rpx 20rpx 10rpx;
+}
+.square-bar-text {
+  font-size: 26rpx;
+  color: #E64F80;
+}
+/* 选择栏 */
+.square-select {
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  width: 720rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: white;
+}
+.square-select-label-list, .square-select-order-list {
+  width: 720rpx;
+  height: 55rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px solid #eeeeee;
+}
+.square-select-label-item, .square-select-order-item {
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 27rpx;
+}
+.select {
+  border-bottom: 8rpx solid #E64F80;
+}
+/* 发帖列表 */
+.square-post-list {
+  margin-top: 110rpx;
+  width: 720rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* 下方提示语 */
+.load-more-status{
+  font-size: 22rpx;
+  margin: 20rpx 0 35rpx 0;
+}

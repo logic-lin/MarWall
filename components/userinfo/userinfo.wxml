@@ -1,0 +1,18 @@
+<!-- components/post/post.wxml -->
+<view class="post-main shadow">
+	<!-- 中部布局 (vertical) -->
+	<view class="post-mid">
+		<!-- 标题 (加粗 | 仅显示前 1 行) -->
+		<text class="post-title">{{userinfoData.type}} </text>
+		<!-- 内容 (仅显示前 2 行) -->
+		<text class="post-content"> 申请者： {{userinfoData.data.reviewer}} </text>
+		<text class="post-content"> 请求理由： {{userinfoData.data.reason}} </text>
+		<text class="post-content"> 回复： {{userinfoData.data.reply.content}} </text>
+	</view>
+	<!-- 底部布局 -->
+	<view class="post-bottom" wx:if="{{order_index==0&&label_index==0}}">
+		<!-- 按钮 -->
+    <navigator class="bottom-button shadow" bindtap="convert" data-index="0">拒绝</navigator>
+    <navigator class="bottom-button shadow" bindtap="convert" data-index="1">同意</navigator>
+	</view>
+</view>

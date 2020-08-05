@@ -1,0 +1,83 @@
+<!-- 标题/价格/内容 -->
+<view class="container shadow" style="margin-top:50rpx">
+  <!-- 标题 -->
+	<view class="form-container">
+		<view class="title">
+      <text> 标题 </text>
+      <image class="required-icon" src="/icon/release/required.png" mode="widthFix"></image>
+    </view>
+		<input placeholder="请输入标题" maxlength="14" data-key="title" bindinput="input"></input>
+	</view>
+  <!-- 内容 -->
+	<view class="form-container">
+		<view class="title">
+      <text> 内容 </text>
+      <image class="required-icon" src="/icon/release/required.png" mode="widthFix"></image>
+    </view>
+		<textarea placeholder="{{loaded?'请输入详细内容':''}}" maxlength="140" data-key="content" bindinput="input" auto-height show-confirm-bar></textarea>
+	</view>
+  <!-- 价格/悬赏/曝光 -->
+	<view class="form-container" wx:if="{{maps.price!='useless'}}">
+    <!-- 标题 -->
+		<view class="title">
+      <!-- 标题文本 -->
+      <text wx:if="{{releaseType=='transaction'}}"> 价格 </text>
+      <text wx:elif="{{releaseType=='help'||releaseType=='QA'}}"> 悬赏 </text>
+      <text wx:else> 曝光 </text>
+      <!-- 浮动标签 -->
+      <image class="required-icon" src="/icon/release/required.png" mode="widthFix" wx:if="{{maps.price==='required'}}"></image>
+    </view>
+    <!-- 输入框 -->
+		<input placeholder="请输入金额" type="digit" maxlength="7" data-key="price" bindinput="input"></input>
+	</view>
+  <!-- 图片 -->
+	<view class="form-container">
+    <view class="title">
+      <text> 图片 </text>
+    </view>
+    <view class="upload-image-container">
+      <image class="upload-image" src="{{item}}" mode="aspectFill" bindtap="onUploadImage" data-index="{{index}}" wx:for="{{tmpImgList}}" wx:key="index" wx:if="{{index<9}}">
+        <icon class="cancel-icon" color="#2e2e2e" type="cancel" size="20" catchtap="onDeleteImage" data-index="{{index}}" wx:if="{{index<tmpImgList.length-1}}"></icon>
+      </image>
+    </view>
+	</view>
+  <!-- 匿名 -->
+	<view class="form-container" wx:if="{{maps.anonymous!='useless'}}">
+		<view class="title">
+      <text> 匿名 </text>
+      <image class="required-icon" src="/icon/release/required.png" mode="widthFix" wx:if="{{maps.anonymous=='required'}}"></image>
+    </view>
+		<picker bindchange="pickerChange" value="{{anonymousIndex}}" range="{{anonymousRange}}" data-type="{{'anonymous'}}">
+			<input class="picker-placeholder" placeholder="请选择是否匿名" disabled="true" value="{{anonymousIndex?anonymousRange[anonymousIndex]:''}}"></input>
+		</picker>
+	</view>
+  <!-- 类型（仅 hole 显示） -->
+  <view class="form-container" wx:if="{{releaseType=='hole'}}">
+		<view class="title">
+      <text> 类型 </text>
+      <image class="required-icon" src="/icon/release/required.png" mode="widthFix"></image>
+    </view>
+		<picker bindchange="pickerChange" value="{{typeIndex}}" range="{{typeRange}}" data-type="{{'type'}}">
+			<input class="picker-placeholder" placeholder="请选择发布类型" disabled="true" value="{{typeIndex?typeRange[typeIndex]:''}}"></input>
+		</picker>
+	</view>
+  <!-- 标签 -->
+	<view class="form-container" wx:if="{{labels.length>0}}">
+    <view class="title">
+      <text> 标签 </text>
+    </view>
+    <view class="choose-label-container">
+      <view class="choose-label" style="background-color:{{labelIndex===index?'#f6bdcf':'#e64f80'}};" bindtap="onChooseLabel" data-index="{{index}}" wx:for="{{labels}}" wx:key="index">
+        <text class="choose-label-text"> {{item}} </text>
+      </view>
+    </view>
+	</view>
+</view>
+<!-- 发布 -->
+<view class="container release-botton shadow" style="background-color:#ccc;margin-bottom:20rpx;" bindtap="release">发布</view>
+<!-- 提示 -->
+<view class="hint">
+  <text class="hint-text"> {{intro.common}} </text>
+  <text class="hint-text"> {{intro[releaseType]}} </text>
+  <text class="hint-text"> {{additional[releaseType]}} </text>
+</view>

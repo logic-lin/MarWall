@@ -1,0 +1,31 @@
+<!--pages/user/user.wxml-->
+<!-- 著容器 -->
+<view class="user-main">
+  <!-- 背景 -->
+  <view class="user-bg"></view>
+  <!-- 卡片 -->
+  <view class="user-card">
+    <!-- 用户信息 -->
+    <view class="user-info">
+      <!-- 头像 -->
+      <image class="user-avatar" src="{{avatar}}" mode="aspectFill" bindlongpress="checkAdmin"></image>
+      <!-- 昵称/认证 -->
+      <view class="user-nickname-cert">
+        <!-- 昵称 -->
+        <text class="user-nickname" wx:if="{{nickname}}"> {{nickname}} </text>
+        <!-- 认证 -->
+        <view class="user-cert" style="background-color: {{certification?'#00c777':'red'}};">
+          <text class="user-cert-text" wx:if="{{certification}}"> 已认证 </text>
+          <text class="user-cert-text" wx:else> 未认证 </text>
+        </view>
+      </view>
+    </view>
+    <!-- 功能列表 -->
+    <view class="user-func-list">
+      <view class="user-func-item" bindtap="onFunc" data-index="{{index}}" wx:for="{{functions}}" wx:key="index">
+        <image class="user-func-icon" src="{{item.icon}}" mode="widthFix"></image>
+        <text class="user-func-name"> {{item.name}} </text>
+      </view>
+    </view>
+  </view>
+</view>

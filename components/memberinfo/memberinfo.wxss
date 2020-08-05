@@ -1,0 +1,43 @@
+.con{
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 10rpx 30rpx -15rpx rgba(0, 0, 0, 0.2);
+}
+.briefItem{
+  padding: 15rpx 5rpx 15rpx 15rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.briefItem>text{
+  margin-left:20rpx ;
+}
+.briefItem>image{
+  width: 60rpx;
+  height: 60rpx;
+  margin-right: 20rpx;
+}
+.morelist{
+  overflow: hidden;
+  width: 100%;
+  height: 0;
+  padding: 20rpx;
+}
+.moreItem{
+  padding: 20rpx 10rpx;
+  display: flex;
+}
+picker{
+  display: inline-block;
+}
+.but{
+  display: inline-block;
+  padding: 5rpx;
+  margin-left: 40rpx;
+  width: 100rpx;
+  font-size: 26rpx;
+  border-radius: 10rpx;
+  background-color: #e64f80;
+  text-align: center;
+  color: white;
+}

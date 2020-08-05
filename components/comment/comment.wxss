@@ -1,0 +1,150 @@
+/* components/comment/comment.wxss */
+/* 主容器 */
+.comment-main {
+  width: 720rpx;
+  background-color: white;
+  display: flex;
+  align-items: flex-start;
+  padding-bottom: 15rpx;
+  border-bottom: 1px solid #EEE;
+}
+/* 头像域 */
+.comment-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  border: 1px solid #eeeeee;
+  margin: 15rpx;
+}
+/* 信息域 */
+.comment-info {
+  display: flex;
+  flex-direction: column;
+}
+/* 顶部布局 */
+.comment-top {
+  width: 610rpx;
+  margin-top: 15rpx;
+}
+.comment-nickname {
+  font-size: 31rpx;
+  margin-left: 30rpx;
+}
+/* 中部布局 */
+.comment-mid {
+  width: 610rpx;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20rpx;
+}
+.comment-content {
+  width: 560rpx;
+  font-size: 29rpx;
+  margin-left: 30rpx;
+  margin-bottom: 20rpx;
+}
+.comment-image-list {
+  width: 590rpx;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 20rpx;
+}
+.comment-image-item {
+  width: 160rpx;
+  height: 160rpx;
+  margin: 15rpx;
+  background-color: #eeeeee;
+}
+/* 底部布局 */
+.comment-bottom {
+  width: 600rpx;
+  margin-top: 20rpx;
+  font-size: 24rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.comment-commentedtime {
+  font-weight: lighter;
+  margin-left: 30rpx;
+  font-size: 22rpx;
+}
+.comment-interactive {
+  display: flex;
+  margin-right: 20rpx;
+}
+.comment-interactive-item {
+  display: flex;
+  align-items: center;
+  color: #424242;
+  margin: 0rpx 10rpx 0rpx;
+}
+.comment-interactive-icon {
+  width: 35rpx;
+  height: 35rpx;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+}
+/* 举报 */
+.comment-report, .comment-application{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+  z-index: 10;
+	transform: scale(1.185);
+	transition: all 0.3s ease-in-out 0s;
+  pointer-events: none;
+  background: #464b50;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-size: 26rpx;
+}
+.comment-report.show-comment-report,
+.comment-application.show-comment-application {
+  pointer-events: auto;
+  transition-duration: 0.2s;
+	transform: scale(1);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.comment-report-view, .comment-application-view {
+  opacity: 1;
+  background-color: white;
+  width: 500rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.comment-report-input-view , .comment-application-input-view{
+  width: 85%;
+  height: 400rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 30rpx 0 10rpx;
+  border: 1px solid #757575;
+}
+.comment-report-input , .comment-application-input{
+  width: 90%;
+  height: 90%;
+}
+.comment-report-put, .comment-application-put {
+  width: 150rpx;
+  height: 48rpx;
+  text-align: center;
+  margin: 10rpx 0 20rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+}
+.comment-report-cancel-icon, .comment-application-cancel-icon {
+  margin: 10rpx 0 25rpx;
+}

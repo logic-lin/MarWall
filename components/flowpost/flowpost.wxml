@@ -1,0 +1,35 @@
+<!--components/flowpost/flowpost.wxml-->
+<!-- 主容器 -->
+<view class="flowpost-main">
+  <!-- 卡片 -->
+  <view class="flowpost-card shadow">
+    <!-- 配图域 -->
+    <view class="flowpost-image-view" style="{{post.image.length>0?'':'background-color:white;'}}">
+      <!-- 配图 -->
+      <image class="flowpost-image-view-image" style="{{post.image.length>0?'':'width:50%;height:50%;'}}" src="{{post.image.length>0?post.image[0]:typeimg}}" mode="{{post.image.length>0?'aspectFill':'aspectFit'}}"></image>
+      <!-- 浮动标签 -->
+      <view class="flowpost-float-label" style="background-color:{{colormaps[post.type]}}">
+        <text class="flowpost-float-label-text"> {{typename}} </text>
+      </view>
+    </view>
+    <!-- 信息域 -->
+    <view class="flowpost-info-view">
+      <!-- 标题 -->
+      <text class="flowpost-title"> {{post.title}} </text>
+      <!-- 标签/价格 -->
+      <view class="flowpost-label-price">
+        <!-- 标签 -->
+				<view class="flowpost-label-list">
+					<view class="flowpost-label-item" wx:for="{{post.label}}" wx:key="index" wx:if="{{post.label.length>0}}">
+						<text class="flowpost-label-name"> {{item}} </text>
+					</view>
+          <view class="flowpost-label-item" wx:if="{{post.label.length==0}}">
+            <text class="flowpost-label-name"> 默认 </text>
+          </view>
+				</view>
+        <!-- 价格 -->
+        <text class="flowpost-price-text" wx:if="{{price}}"> ￥{{price}} </text>
+      </view>
+    </view>
+  </view>
+</view>

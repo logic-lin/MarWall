@@ -1,0 +1,35 @@
+<!--pages/square/square.wxml-->
+<wxs src="wxs/tools.wxs" module="tools"/>
+<!-- 主容器 -->
+<view class="square-main">
+  <!-- 选择栏 -->
+  <view class="square-select">
+    <!-- 标签选择 -->
+    <view class="square-select-label-list" wx:if="{{label.length>1}}">
+        <view class="square-select-label-item" bindtap="onLabel" data-index="{{index}}" style="{{label_index==index?'color:#ec7ca0;':''}}" wx:for="{{label}}" wx:key="index">
+          <text class="{{label_index==index?'select':''}}" style="padding:8rpx 0rpx 8rpx;"> {{item}} </text>
+        </view>
+    </view>
+    <!-- 排序选择 -->
+    <view class="square-select-order-list"  wx:if="{{order.length>0}}">
+      <view class="square-select-order-item" bindtap="onOrder" data-index="{{index}}" style="{{order_index==index?'color:#ec7ca0;':''}}" wx:for="{{order}}" wx:key="index">
+        <text class="{{order_index==index?'select':''}}" style="padding:8rpx 0rpx 8rpx;"> {{item}} </text>
+      </view>
+    </view>
+  </view>
+  <!-- 卡片列表 -->
+  <view class="square-post-list" wx:if="{{label_index==0&&(!(order_index == 0 && item.done))}}" wx:for="{{userinfoData}}">
+    <userinfo wx:if="{{label_index==0}}" bindconvert="convert" userinfoData="{{item}}" label_index="{{0}}" order_index="{{order_index}}"></userinfo>
+  </view>
+    <!-- 这是反馈和举报的卡片，懒得写组件了 -->
+  <view class="feedback-card shadow" wx:if="{{label_index==1 && order_index==0}}" wx:for="{{userinfoData}}">
+    <text class="card-content" style="margin-top:20rpx">反馈时间：{{tools.formatTime(item.feedbackedtime)}}</text>
+    <text class="card-content">反馈内容：{{item.content}}</text>
+    <text class="card-content">后台回复：{{item.reply.content}}</text>
+  </view>
+  <view class="feedback-card shadow" wx:if="{{label_index==1 && order_index==1}}" wx:for="{{userinfoData}}">
+    <text class="card-content" style="margin-top:20rpx">举报时间：{{tools.formatTime(item.reportedtime)}}</text>
+    <text class="card-content">举报内容：{{item.reason}}</text>
+    <text class="card-content">后台回复：{{item.reply.content}}</text>
+  </view>
+</view>

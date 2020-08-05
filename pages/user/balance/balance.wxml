@@ -1,0 +1,24 @@
+<!--pages/user/balance/balance.wxml-->
+<!-- 主容器 -->
+<view class="main vbox start">
+  <!-- 列表 -->
+  <view class="full-width vbox start">
+    <!-- 余额 -->
+    <view class="major-width vbox start shadow" style="margin-top:30rpx;color:white;">
+      <!-- 标题/内容 -->
+      <view class="full-width hbox between" style="height:120rpx;background-color:#ffc40f;">
+        <!-- 标题 -->
+        <text style="margin-left:50rpx;"> {{balance.title}} </text>
+        <!-- 内容 -->
+        <text style="margin-right:50rpx;"> {{balance.content}} </text>
+      </view>
+      <!-- 输入/按钮 -->
+      <view class="full-width hbox" style="height:70rpx;background-color:white;justify-content:space-between;">
+        <!-- 输入 -->
+        <input class="input" type="digit" maxlength="7" placeholder="请输入提现金额" value="{{balanceStr}}" data-key="balance" placeholder-style="font-size:27rpx;color:#cccccc;" bindinput="input"></input>
+        <!-- 按钮 -->
+        <view class="btn border" style="background-color:#00b26a;" bindtap="withdraw"> 提现 </view>
+      </view>
+    </view>
+  </view>
+</view>
